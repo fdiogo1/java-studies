@@ -12,14 +12,16 @@
 
 typedef int Key;
 typedef struct data Item;
-struct data {
+struct data 
+{
     Key chave;
     char info[100];
 };
 
 
 typedef struct node STnode;
-struct node {
+struct node 
+{
     Item item;
     STnode *esq;
     STnode *dir;
@@ -44,7 +46,8 @@ Item STsearch(STnode *no, Key v)
     else return STsearch(no->dir, v);
 }
 
-STnode *STinsert(STnode *no, Item item){
+STnode *STinsert(STnode *no, Item item)
+{
     
     if(no == NULL)
         return new(item, NULL, NULL);
