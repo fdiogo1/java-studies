@@ -12,7 +12,7 @@
 #define cmpExch(A, B) if(less(A, B)) {exch(A,B)}
 
 /***********************************************************************************/
-const void printIntVector(int *v, int size)
+void printIntVector(const int *v, int size)
 {
     for (int i = 0; i < size; i++)
     {
