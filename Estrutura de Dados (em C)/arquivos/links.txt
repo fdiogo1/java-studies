@@ -1,0 +1,5 @@
+https://www.ime.usp.br/~pf/algoritmos/aulas/ordena.html
+https://www.ime.usp.br/~pf/algoritmos/aulas/fila.html
+https://www.ime.usp.br/~pf/algoritmos/aulas/pilha.html
+https://www.ime.usp.br/~pf/algoritmos/aulas/bint.html
+https://www.ic.unicamp.br/~rafael/cursos/2s2018/mc202/slides/unidade17-arvores-binarias.pdf
