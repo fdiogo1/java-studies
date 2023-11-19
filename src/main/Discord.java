@@ -108,7 +108,7 @@ public class Discord
         
         do
         {   
-            clearScreen();
+            //clearScreen();
             if (data.getStatus())
                 System.out.println("[System] The database has been initiliazed successfully.");
             else 
@@ -807,10 +807,10 @@ public class Discord
                     //clearScreen();
                     break;
                 default:
-                    // System.out.println("[System] Invalid option, try again.");
-                    // System.out.println("[System] Press enter to continue...");
-                    // wait.nextLine();
-                    // clearScreen();
+                    System.out.println("[System] Invalid option, try again.");
+                    System.out.println("[System] Press enter to continue...");
+                    wait.nextLine();
+                    clearScreen();
                     break;
             }
         }
