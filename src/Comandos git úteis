@@ -9,4 +9,5 @@ Comandos úteis:
     7) git status
     8) git branch
     9) git branch -b <nome-da-nova-branch> 
-    10) git log / reflog
+    10) git checkout
+    11) git log / reflog
