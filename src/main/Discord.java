@@ -32,7 +32,7 @@ public class Discord
         System.out.println("|  [2]: List your friends                     |");
         System.out.println("|  [3]: Add a new friend                      |");
         System.out.println("|  [4]: Send a direct message                 |");
-        System.out.println("|  [5]: List your servers                     |");
+        System.out.println("|  [5]: List/View info about your servers     |");
         System.out.println("|  [6]: Send message in a server              |");
         System.out.println("|  [7]: Settings                              |");
         System.out.println("|  [8]: Join/Create a server                  |");
@@ -357,26 +357,51 @@ public class Discord
                                     System.out.println("[System] Press enter to return...");
                                     wait.nextLine();
                                     break;
-                                case "5": // list servers from the user
+                                case "5": // list and view servers info
                                     clearScreen();
-                                    System.out.println("[System] You chose '5: List your servers'");
+                                    System.out.println("[System] You chose '5: List and view your servers'");
                                     if (loggedUser.getAmountServers() > 0)
                                     {
                                         System.out.printf("[System] You are in '%s' servers: \n\n", loggedUser.getAmountServers());
                                         Server[] list = loggedUser.getServers();
                                         for (int i = 0; i < loggedUser.getAmountServers(); i++)
                                         {
-                                            System.out.printf("[%d] Server name: %s\n[%d] Founded in: %s\n[%d] Amount of members: %d\n\n", i+1, list[i].getName(), i+1, list[i].getDtCreated(), i+1, list[i].getAmountUsers());
+                                            System.out.printf("[%d] %s\n[%d] Members: %d\n\n", i+1, list[i].getName(), i+1, list[i].getAmountUsers());
                                         }
-                                        System.out.println("[System] Enter the name of the server you want to see more informations\n>> ");
+
+                                        System.out.println("[System] Enter the name of the server you want to see more informations ");
+                                        System.out.println("[System] Tip: You can type 'cancel' in any moment to return.");
+                                        System.out.print(">> ");
                                         clearBuffer(input);
-                                        //String viewServer = input.nextLine();
+                                        String viewServer = input.nextLine();
+                                        Server viewServer2 = loggedUser.findServer(viewServer);
+
+                                        while (!viewServer.equalsIgnoreCase("cancel") && viewServer2 == null)
+                                        {
+                                            System.out.printf("[System] You aren't in any server named '%s', try again.\n>> ", viewServer);
+                                            viewServer = input.nextLine();
+                                            viewServer2 = loggedUser.findServer(viewServer);
+                                        }
+
+                                        if (!viewServer.equalsIgnoreCase("cancel"))
+                                        {
+                                            System.out.printf("\n[-] Server name: %s\n", viewServer2.getName());
+                                            System.out.printf("[-] Founded in: %s\n", viewServer2.getDtCreated());
+                                            System.out.printf("[-] List of members: (%d)\n\n", viewServer2.getAmountUsers());
+                                            User[] listOfUsers = viewServer2.getUsers();
+
+                                            for (int i = 0; i < viewServer2.getAmountUsers(); i++)
+                                            {
+                                                System.out.printf("    [%d] %s (user: %s)\n", i+1, listOfUsers[i].getName(), listOfUsers[i].getUser());
+                                            }
+                                            System.out.println("");
+                                        }
+
                                     }
                                     else 
                                         System.out.println("[System] You aren't member of any server. You can create or join in one with the option '8'");
                                     System.out.print("[System] Press enter to continue...");
-                                    clearBuffer(input);
-                                    input.nextLine();
+                                    wait.nextLine();
                                     break;
                                 case "6": // send message in a server
                                     clearScreen();
