@@ -4,11 +4,10 @@ import app.*;
 
 public class Database implements Search
 {
-    private final String name = "DISCORD DATA";
     private User[] users;
     private int amountUsers = 0;
     private Server[] servers;
-    public boolean status;
+    private boolean status;
     private int amountServers = 0;
     private Chat[] chatsUsers;
     private int amountChatsUsers = 0;
@@ -55,11 +54,6 @@ public class Database implements Search
         this.chatsUsers = newChats;
     }
 
-    public String getName()
-    {
-        return name;
-    }
-
     public boolean newUser(User p)
     {
         if (amountUsers < 100)
@@ -69,11 +63,6 @@ public class Database implements Search
         }
         else 
             return false;
-    }
-
-    public String toString()
-    {
-        return "Discord Database Name: " + getName() + "\nAmount users: "+ getAmountUsers();
     }
 
     public User findUser(String user)
@@ -186,7 +175,5 @@ public class Database implements Search
         }   
         else 
             return false;
-    
     }
-
 }

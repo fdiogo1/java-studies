@@ -55,18 +55,6 @@ public class Server extends New implements Search
         return chat;
     }
 
-    public void listUsers()
-    {
-        if (amountUsers > 0) 
-        {
-            for (int i = 0; i < amountUsers; i++)
-            {
-                System.out.println(users[i]);
-            }
-        }
-        else 
-            System.out.println("No users found in server" + getName());
-    }
 
     public User findUser(String user)
     {

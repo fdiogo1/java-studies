@@ -2,9 +2,9 @@ package app;
 
 public abstract class New 
 {
-    private String name;
-    private String image;
-    private String dtCreated;
+    protected String name;
+    protected String image;
+    protected String dtCreated;
 
     public New (String name, String image, String dtCreated)
     {
