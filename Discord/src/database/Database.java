@@ -45,6 +45,16 @@ public class Database implements Search
         return amountChatsUsers;
     }
 
+    public void setAmountChatUsers(int newAmountChatUsers)
+    {
+        this.amountChatsUsers = newAmountChatUsers;
+    }
+
+    public void setChatUsers(Chat[] newChats)
+    {
+        this.chatsUsers = newChats;
+    }
+
     public String getName()
     {
         return name;
@@ -145,4 +155,38 @@ public class Database implements Search
 
         return chat;    
     }
+
+    public void setUsers(User[] newUsers)
+    {
+        this.users = newUsers;
+    }
+
+    public void setAmountUsers(int newAmountUsers)
+    {
+        this.amountUsers = newAmountUsers;
+    }
+
+    public boolean deleteUser(String user)
+    {
+        User p = findUser(user);
+        if (p != null)
+        {
+            User[] newUsers = new User[100];
+            int j = 0;
+            for (int i = 0; i < amountUsers; i++)
+            {
+                if (!users[i].getUser().equalsIgnoreCase(user))
+                    newUsers[j++] = users[i];
+            }
+
+            setUsers(newUsers);
+            setAmountUsers(amountUsers-1);
+        
+            return true;
+        }   
+        else 
+            return false;
+    
+    }
+
 }

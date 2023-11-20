@@ -39,7 +39,9 @@ public class Discord
         System.out.println("|  [9]: Leave a server                        |");
         System.out.println("|  [10]: Delete a friend                      |");
         System.out.println("|                                             |");
-        System.out.println("|  [11]: Clean your screen                    |");
+        System.out.println("|  [11]: Delete your account                  |");
+        System.out.println("|                                             |");
+        System.out.println("|  [12]: Clean your screen                    |");
         System.out.println("|_____________________________________________|");
     }
 
@@ -378,9 +380,18 @@ public class Discord
 
                                         while (!viewServer.equalsIgnoreCase("cancel") && viewServer2 == null)
                                         {
-                                            System.out.printf("[System] You aren't in any server named '%s', try again.\n>> ", viewServer);
-                                            viewServer = input.nextLine();
-                                            viewServer2 = loggedUser.findServer(viewServer);
+                                            if (viewServer.length() > 0)
+                                            {
+                                                System.out.printf("[System] You aren't in any server named '%s', try again.\n>> ", viewServer);
+                                                viewServer = input.nextLine();
+                                                viewServer2 = loggedUser.findServer(viewServer);
+                                            }
+                                            else
+                                            {
+                                                System.out.print(">> ");
+                                                viewServer = input.nextLine();
+                                                viewServer2 = loggedUser.findServer(viewServer);
+                                            } 
                                         }
 
                                         if (!viewServer.equalsIgnoreCase("cancel"))
@@ -729,13 +740,83 @@ public class Discord
                                     break;
                                 case "11":
                                     clearScreen();
+                                    System.out.println("[System] You chose '11: Delete account'");
+                                    System.out.println("[System] Tip: You can type 'cancel' in any moment to return.\n");
+                                    System.out.println("[System] To be sure you want to do this, enter your password again:");
+                                    System.out.print(">> ");
+                                    String delPassword = input.next();
+
+                                    while (!delPassword.equalsIgnoreCase(loggedUser.getPassword()) && !delPassword.equalsIgnoreCase("cancel"))
+                                    {
+                                        System.out.println("[System] Wrong password. ");
+                                        System.out.print("[System] Try again: ");
+                                        delPassword = input.next();
+                                    }
+
+                                    if (!delPassword.equalsIgnoreCase("cancel"))
+                                    {
+                                        // excluir os chats do qual o usuário faz parte
+                                        Chat[] dataChats = data.getChatsUsers();
+                                        Chat[] newDataChats = new Chat[100];
+                                        int j = 0;
+
+                                        for (int i = 0; i < data.getAmountChatsUsers(); i++)
+                                        {
+                                            if (dataChats[i].findUser(loggedUser.getUser()) == null)
+                                                newDataChats[j++] = dataChats[i];
+                                        }
+                                        
+                                        data.setAmountChatUsers(j);
+                                        data.setChatUsers(newDataChats);
+                                        // excluir os amigos
+                                        if (loggedUser.getAmountFriends() > 0)
+                                        {
+                                            User[] friendsToDelete = data.getUsers();
+
+                                            for (int i = 0; i < data.getAmountUsers(); i++)
+                                            {
+                                                if (friendsToDelete[i].findUser(loggedUser.getUser()) != null)
+                                                    loggedUser.deleteFriend(friendsToDelete[i]);
+                                            }
+                                        }
+
+                                        // sair dos servidores
+
+                                        if (loggedUser.getAmountServers() > 0)
+                                        {
+                                            Server[] serversToDelete = data.getServers();
+                                            for (int i = 0; i < data.getAmountServers(); i++)
+                                            {
+                                                if (serversToDelete[i].findUser(loggedUser.getUser()) != null)
+                                                    loggedUser.leaveServer(serversToDelete[i]);
+                                            }
+                                        }
+    
+                                            // retirar do banco de dados
+                                        if (data.deleteUser(loggedUser.getUser()))
+                                            System.out.println("[System] Your account have been deleted successfully.");
+                                        else 
+                                            System.out.println("[System] Your account couldn't be deleted. Try again later, or report us the error.");
+
+                                        
+                                        
+                                        // setar loggedUser para null e logged para false
+                                        loggedUser = null;
+                                        logged = false;
+                                    }
+                                    System.out.println("[System] Press enter to continue...");
+                                    wait.nextLine();
+                                    clearScreen();
+                                    break; 
+                                case "12":
+                                    clearScreen();
                                     break;
                                 default:
                                     System.out.println("[System] Invalid option, try again.");
                                     break;
                             }
                         }
-                        while (!option.equalsIgnoreCase("0"));
+                        while (!option.equalsIgnoreCase("0") && logged != false);
                     }
                     break;
                 case "2": // register
@@ -765,13 +846,13 @@ public class Discord
 
                     if (checkUser == 0 && newUser.equalsIgnoreCase("cancel") == false)
                     {
-                        System.out.print("[!] Enter your name ");
+                        System.out.print("[!] Enter your name: ");
                         clearBuffer(input);
                         String name = input.nextLine();
                         if (!name.equalsIgnoreCase("cancel"))
                         {
                             
-                            System.out.print("[!] Enter your password ");
+                            System.out.print("[!] Enter your password: ");
                             String passwordNewUser = input.next();
                             if (!passwordNewUser.equalsIgnoreCase("cancel"))
                             {
