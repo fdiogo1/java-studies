@@ -1,0 +1,11 @@
+sort1 uses: bubble sort
+
+How do you know?: because even if it's sorted, it checks again one per one.
+
+sort2 uses: merge sort
+
+How do you know?: it's really fast, due to the recursion.
+
+sort3 uses: selection sort
+
+How do you know?: it's the one that takes more time to sort.

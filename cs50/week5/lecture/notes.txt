@@ -1,0 +1,18 @@
+DATA STRUCTURES:
+
+abstract data type -> queue, stack, tree
+
+Queue -> First-In, First-Out
+    two functions: enqueue, dequeue -> add at end, remove at begin
+
+Stacks -> Last-In, First-Out
+    two functions: push, pop -> 'push' at top, 'pop' at top
+
+
+
+
+LINKED LISTS -> using the heap. it's better than array. unlimited size. not contiguous in the memory
+
+TREES -> two dimensions, height and 
+
+BINARY SEARCH TREE
