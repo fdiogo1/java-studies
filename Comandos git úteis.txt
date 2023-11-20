@@ -4,8 +4,8 @@ Comandos úteis:
     2) git add <nome do arquivo ou só um ".">
     3) git commit -m "msg"
     4) git remote add origin <url do repositório>
-    5) git push 
-    6) git pull
+    5) git push (envia atualizações do diretório local para o repositório)
+    6) git pull (atualiza o diretório local)
     7) git status
     8) git branch
     9) git branch -b <nome-da-nova-branch> 
