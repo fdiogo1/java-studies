@@ -2,8 +2,7 @@ package app;
 
 import java.util.Calendar;
 
-public class Chat implements Search
-{
+public class Chat implements Search {
     private String chatName = null;
     private User user1 = null;
     private User user2 = null;
@@ -48,7 +47,6 @@ public class Chat implements Search
         Message newMessage = new Message(sender, message, date);
         this.message[amountMessages++] = newMessage;
     }
-
 
     public Message[] getLastMessages()
     {
